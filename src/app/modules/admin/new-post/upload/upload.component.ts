@@ -6,8 +6,6 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { FileUpload } from '../../shared/models/file-upload';
 import { UploadFileService } from '../../services/upload-image.service';
 
-
-
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -20,14 +18,13 @@ export class UploadComponent implements OnInit, AfterViewInit {
   setCoverPhotoEE: EventEmitter<img> = new EventEmitter<img>();
   @ViewChild('fileUploader')
   fileUploader: ElementRef;
-  @ViewChild("progress")
-  progressBar;
   progress: { percentage: number } = { percentage: 0 };
   selectedFiles: FileList;
   uploadedImage: File;
   imagePreview;
   allUploaded: Array<{ file: File; url: string }> = [];
   uploadedLargeImage: File;
+  uploading: boolean;
 
   constructor(
     private uploadService: UploadFileService,
@@ -40,21 +37,22 @@ export class UploadComponent implements OnInit, AfterViewInit {
       if (imageFile['url'].includes('size-550-')) {
         this.allUploaded.push(imageFile);
         this.resetImageInput();
+        this.uploading = false
       }
     });
   }
   ngAfterViewInit() {
-    console.log(this.progressBar);
+   
   }
   resetImageInput() {
     this.imagePreview = false;
     this.fileUploader.nativeElement.value = null;
-    this.progress.percentage = 0
+    this.progress.percentage = 0;
   }
-  
+
   setCoverPhoto(image: { name: string; index: number }) {
-   this.allUploaded.unshift(this.allUploaded.splice(image.index, 1)[0]);
-    this.setCoverPhotoEE.emit(image)
+    this.allUploaded.unshift(this.allUploaded.splice(image.index, 1)[0]);
+    this.setCoverPhotoEE.emit(image);
   }
   deleteImageFromNewPost(image: { imgName: string; index: number }) {
     this.allUploaded.splice(image.index, 1);
@@ -70,17 +68,16 @@ export class UploadComponent implements OnInit, AfterViewInit {
   }
 
   selectFile(event) {
-
     const file = event.target.files.item(0);
-    const imageId =generateId()
+    const imageId = generateId();
     function generateId(): string {
-      return (
-      `${Math.random().toString(36).substr(2, 9)}`
-      );
+      return `${Math.random()
+        .toString(36)
+        .substr(2, 9)}`;
     }
     this.ng2ImgMax.resizeImage(file, 550, 10000).subscribe(
       result => {
-        this.uploadedImage = new File([result], 'size-550-' +imageId + result.name);
+        this.uploadedImage = new File([result], 'size-550-' + imageId + result.name);
         this.getImagePreview(this.uploadedImage);
       },
       error => {
@@ -89,7 +86,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
     );
     this.ng2ImgMax.resizeImage(file, 1000, 10000).subscribe(
       result => {
-        this.uploadedLargeImage = new File([result], 'size-800-'+ imageId + result.name);
+        this.uploadedLargeImage = new File([result], 'size-800-' + imageId + result.name);
         this.getImagePreview(this.uploadedLargeImage);
       },
       error => {
@@ -105,6 +102,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   }
 
   upload() {
+    this.uploading = true
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
 
@@ -112,7 +110,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
     this.uploadService.pushFileToStorage(this.uploadedLargeImage, this.progress);
   }
 }
-interface img{
-  name: string; 
-  index: number; 
+interface img {
+  name: string;
+  index: number;
 }

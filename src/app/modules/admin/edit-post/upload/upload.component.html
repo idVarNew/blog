@@ -7,7 +7,7 @@
   <ng-container *ngIf="imagePreview">
     <img [src]="sanitizer.bypassSecurityTrustUrl(imagePreview)" class="image-preview mb-3" />
   </ng-container>
-  <app-progress-bar [imagePreview]="imagePreview" [progress]="progress"></app-progress-bar>
+  <app-progress-bar [uploading]="uploading" [progress]="progress"></app-progress-bar>
   <button type="button" class="btn btn-success" *ngIf="selectedFiles" (click)="upload()">Upload</button>
   <br />
 </div>

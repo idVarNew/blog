@@ -13,7 +13,7 @@ export class UploadComponent implements OnInit, OnDestroy {
   @Input()
   post: PostModel;
   @Input()
-  param
+  param;
   @Output()
   deleteImageFromEditPostEE: EventEmitter<Img> = new EventEmitter<Img>();
   @Output()
@@ -28,8 +28,9 @@ export class UploadComponent implements OnInit, OnDestroy {
   uploadSmalledImage: File;
   uploadedLargeImage: File;
   imagesVisible = true;
-sub1
-sub2
+  uploading: boolean;
+  sub1;
+  sub2;
   constructor(
     private uploadService: UploadFileService,
     private ng2ImgMax: Ng2ImgMaxService,
@@ -41,6 +42,7 @@ sub2
       if (imageFile['url'].includes('size-550-')) {
         this.allUploaded.push(imageFile);
         this.resetImageInput();
+        this.uploading = false;
       }
     });
   }
@@ -97,7 +99,7 @@ sub2
       }
     );
 
-    this.sub2 =  this.ng2ImgMax.resizeImage(file, 800, 10000).subscribe(
+    this.sub2 = this.ng2ImgMax.resizeImage(file, 800, 10000).subscribe(
       result => {
         this.uploadedLargeImage = new File([result], 'size-800-' + imageId + result.name);
         this.getImagePreview(this.uploadedLargeImage);
@@ -115,16 +117,13 @@ sub2
   }
 
   upload() {
-   // const file = this.selectedFiles.item(0);
-  //  this.selectedFiles = undefined;
+    this.uploading = true;
 
     this.uploadService.pushFileToStorage(this.uploadSmalledImage, this.progress);
-   this.uploadService.pushFileToStorage(this.uploadedLargeImage, this.progress);
+    this.uploadService.pushFileToStorage(this.uploadedLargeImage, this.progress);
   }
- 
-  ngOnDestroy(){
- 
-  }
+
+  ngOnDestroy() {}
 }
 
 interface Img {
