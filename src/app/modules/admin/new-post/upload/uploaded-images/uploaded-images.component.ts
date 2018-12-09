@@ -7,12 +7,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class UploadedImagesComponent implements OnInit {
   @Input()
-  allUploaded: Array<{ file: File; url: string }>;
+  imageFiles
   @Output()
-  deleteImageFromNewPostEE: EventEmitter<{ imgName: string; index: number }> = new EventEmitter<{
-    imgName: string;
-    index: number;
-  }>();
+  deleteImageFromNewPostEE: EventEmitter<img> = new EventEmitter<img>();
   @Output()
   setCoverPhotoEE: EventEmitter<img> = new EventEmitter<img>();
  
@@ -23,8 +20,8 @@ export class UploadedImagesComponent implements OnInit {
   setCoverPhoto(name: string, index: number) {
     this.setCoverPhotoEE.emit({ name, index });
   }
-  deleteImageFromNewPost(imgName: string, index: number) {
-    this.deleteImageFromNewPostEE.emit({ imgName, index });
+  deleteImageFromNewPost(name: string, index: number) {
+    this.deleteImageFromNewPostEE.emit({ name, index });
   }
 }
 interface img {

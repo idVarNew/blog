@@ -4,12 +4,11 @@
     <input type="file" id="post-images" (change)="selectFile($event)" accept="image/*" #fileUploader class="mb-3" />
   </ng-container>
 
-  <ng-container *ngIf="imagePreview">
+  <ng-container *ngIf="uploading">
     <img [src]="sanitizer.bypassSecurityTrustUrl(imagePreview)" class="image-preview mb-3" />
   </ng-container>
   <app-progress-bar [uploading]="uploading" [progress]="progress"></app-progress-bar>
-  <button type="button" class="btn btn-success" *ngIf="selectedFiles" (click)="upload()">Upload</button>
-  <br />
+  <button type="button" class="btn btn-success" *ngIf="selectedFiles" (click)="upload()">Upload</button> <br />
 </div>
 
 <div class="card p-2 border-0" *ngIf="post?.img.small.length">

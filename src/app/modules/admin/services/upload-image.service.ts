@@ -12,8 +12,6 @@ import { FileUpload } from '../shared/models/file-upload';
 export class UploadFileService {
   private basePath = '/uploads';
   downloadURL = new Subject();
-  uploadeImages = new Subject();
-
   constructor(private db: AngularFireDatabase) {
   }
 
@@ -31,12 +29,9 @@ export class UploadFileService {
       },
       () => {
         uploadTask.snapshot.ref.getDownloadURL().then(downloadURL => {
-          this.uploadeImages.next({
-            file: fileUpload,
-            url: downloadURL
-          });
-          this.downloadURL.next({ url: downloadURL, name: fileUpload.name });
+              this.downloadURL.next({ url: downloadURL, name: fileUpload.name });
         });
+       
       }
     );
   }

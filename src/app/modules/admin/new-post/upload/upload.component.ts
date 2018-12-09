@@ -1,5 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { PostModel, PostImagesModel } from '../../../../shared/models/index';
+import { PostImagesModel } from './../../../../shared/models/images.model';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { PostModel } from '../../../../shared/models/index';
 
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -11,18 +12,21 @@ import { UploadFileService } from '../../services/upload-image.service';
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })
-export class UploadComponent implements OnInit, AfterViewInit {
+export class UploadComponent implements OnInit {
   @Input()
   post: PostModel;
+  @Input()
+  imageFiles: PostImagesModel;
   @Output()
   setCoverPhotoEE: EventEmitter<img> = new EventEmitter<img>();
+  @Output()
+  deleteImageFromNewPostEE: EventEmitter<img> = new EventEmitter<img>();
   @ViewChild('fileUploader')
   fileUploader: ElementRef;
   progress: { percentage: number } = { percentage: 0 };
   selectedFiles: FileList;
   uploadedImage: File;
   imagePreview;
-  allUploaded: Array<{ file: File; url: string }> = [];
   uploadedLargeImage: File;
   uploading: boolean;
 
@@ -33,30 +37,24 @@ export class UploadComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.uploadService.uploadeImages.subscribe((imageFile: { file: File; url: string }) => {
-      if (imageFile['url'].includes('size-550-')) {
-        this.allUploaded.push(imageFile);
+    this.uploadService.downloadURL.subscribe((image: { url: string; name: string }) => {
+      if (image['url'].includes('size-800-')) {
         this.resetImageInput();
-        this.uploading = false
       }
     });
   }
-  ngAfterViewInit() {
-   
-  }
+
   resetImageInput() {
-    this.imagePreview = false;
     this.fileUploader.nativeElement.value = null;
-    this.progress.percentage = 0;
+    this.uploading = false;
   }
 
   setCoverPhoto(image: { name: string; index: number }) {
-    this.allUploaded.unshift(this.allUploaded.splice(image.index, 1)[0]);
     this.setCoverPhotoEE.emit(image);
   }
-  deleteImageFromNewPost(image: { imgName: string; index: number }) {
-    this.allUploaded.splice(image.index, 1);
-    this.uploadService.deleteFileStorage(image.imgName);
+
+  deleteImageFromNewPost(image: { name: string; index: number }) {
+    this.deleteImageFromNewPostEE.emit(image);
   }
 
   getImagePreview(file: File) {
@@ -102,7 +100,7 @@ export class UploadComponent implements OnInit, AfterViewInit {
   }
 
   upload() {
-    this.uploading = true
+    this.uploading = true;
     const file = this.selectedFiles.item(0);
     this.selectedFiles = undefined;
 

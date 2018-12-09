@@ -1,3 +1,4 @@
+import { UploadFileService } from './../services/upload-image.service';
 import { PostImagesComponent } from './upload/post-images/post-images.component';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
@@ -6,7 +7,6 @@ import { switchMap, map, first, tap } from 'rxjs/operators';
 import * as AppActions from '../../../store/actions';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { StoreModel, PostModel, PostImagesModel, PostImageModel, NewPost } from 'src/app/shared/models/index';
-import { UploadFileService } from './upload/upload-file.service';
 
 @Component({
   selector: 'app-edit-post',
@@ -22,6 +22,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
   downloadURLSub
   param :string;
   activeRouteSub
+
   constructor(
     private activeRoute: ActivatedRoute,
     private store: Store<StoreModel>,
@@ -43,7 +44,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
             map((posts: Array<PostModel>) => {
               return posts.filter((post: PostModel) => {
                 if (post.id === param.get('id')) {
-                  this.param = param.get('id');
+                   this.param = param.get('id');
                   this.labels = post.labels
                   this.post =  post;
                   this.imageFiles = this.post['img'];
@@ -67,6 +68,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+
     this.activeRouteSub.unsubscribe();
     this.downloadURLSub.unsubscribe();
   }
@@ -129,12 +131,18 @@ export class EditPostComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/posts']);
   }
 
-  setCoverPhoto(postImage: { imageName: string; index: number; postId: string }) {
-    this.store.dispatch(new AppActions.setCoverPhoto(postImage));
+  setCoverPhoto(image:{ string; index: number; postId: string }) {
+    const cover: PostImagesModel = this.post.img;
+    cover.small.unshift(cover.small.splice(image.index, 1)[0]);
+    cover.large.unshift(cover.large.splice(image.index, 1)[0]);
   }
 
-  deleteImageFromEditPost(postImage: { imageToDelete: PostImagesComponent; postId: string }) {
-    this.store.dispatch(new AppActions.deletePostImage(postImage));
+  deleteImageFromEditPost(image: { name: string; index: number; postId: string }) {
+    const imageToDelete: PostImagesModel = Object.assign({}, this.post.img);
+    imageToDelete.small.splice(image.index, 1);
+    imageToDelete.large.splice(image.index, 1);
+    this.uploadService.deleteFileStorage(image.name);
+    this.store.dispatch(new AppActions.deletePostImage({ imageToDelete, postId: image.postId }));
   }
 
   removeLabel(label: string) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import * as AppActions from '../../../store/actions';
@@ -8,13 +8,12 @@ import { Router } from '@angular/router';
 import { StoreModel, PostModel, PostImageModel, PostImagesModel, NewPost } from 'src/app/shared/models/index';
 import { UploadFileService } from '../services/upload-image.service';
 
-
 @Component({
   selector: 'app-new-post',
   templateUrl: './new-post.component.html',
   styleUrls: ['./new-post.component.scss']
 })
-export class NewPostComponent implements OnInit {
+export class NewPostComponent implements OnInit, OnDestroy {
   NewPostForm: FormGroup;
   labels: Array<string> = [];
   allLabels: Array<string> = [];
@@ -22,6 +21,8 @@ export class NewPostComponent implements OnInit {
     small: [],
     large: []
   };
+  downloadURLSub;
+  labelsLSub;
 
 
   constructor(
@@ -31,10 +32,8 @@ export class NewPostComponent implements OnInit {
     private uploadService: UploadFileService
   ) {}
 
- 
-
   ngOnInit() {
-    this.store.select('posts').subscribe((posts: Array<PostModel>) => {
+    this.labelsLSub = this.store.select('posts').subscribe((posts: Array<PostModel>) => {
       posts.forEach((post: PostModel) => {
         const labels: Array<string> = this.allLabels.concat(post.labels);
         this.allLabels = Array.from(new Set(labels));
@@ -46,14 +45,21 @@ export class NewPostComponent implements OnInit {
       description: [null, [Validators.required, Validators.maxLength(1000)]]
     });
 
-    this.uploadService.downloadURL.subscribe((image: PostImageModel) => {
+    this.downloadURLSub = this.uploadService.downloadURL.subscribe((image: PostImageModel) => {
       if (image['url'].includes('size-550-')) {
         this.imageFiles.small.push(this.generateSizeVersions(image));
       } else {
         this.imageFiles.large.push(this.generateSizeVersions(image));
-      }
+       }
+   
     });
   }
+
+  ngOnDestroy() {
+    this.labelsLSub.unsubscribe();
+    this.downloadURLSub.unsubscribe();    
+  }
+
   private generateSizeVersions(image: PostImageModel): PostImageModel {
     const version: PostImageModel = {
       name: image['name'],
@@ -61,12 +67,19 @@ export class NewPostComponent implements OnInit {
     };
     return version;
   }
+
   setCoverPhoto(image: { name: string; index: number }) {
     const cover: PostImagesModel = Object.assign({}, this.imageFiles);
 
     cover.small.unshift(cover.small.splice(image.index, 1)[0]);
     cover.large.unshift(cover.large.splice(image.index, 1)[0]);
     this.imageFiles = cover;
+  }
+
+  deleteImageFromNewPost(image){
+    this.imageFiles.small.splice(image.index, 1)
+    this.imageFiles.large.splice(image.index, 1)
+    this.uploadService.deleteFileStorage(image.name);
   }
 
   onSubmit() {
@@ -87,7 +100,7 @@ export class NewPostComponent implements OnInit {
       );
     }
     this.store.dispatch(new AppActions.addNewPost(newPost));
-    this.router.navigate(['/posts']);
+    this.router.navigate(['/admin/posts']);
   }
 
   removeLabel(label: string) {

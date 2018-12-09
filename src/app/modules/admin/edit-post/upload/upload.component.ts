@@ -1,8 +1,9 @@
+import { UploadFileService } from './../../services/upload-image.service';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { PostModel, PostImageModel, PostImagesModel } from '../../../../shared/models/index';
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import { DomSanitizer } from '@angular/platform-browser';
-import { UploadFileService } from './upload-file.service';
+
 
 @Component({
   selector: 'app-upload',
@@ -22,7 +23,6 @@ export class UploadComponent implements OnInit, OnDestroy {
   setCoverPhotoEE: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('fileUploader')
   fileUploader: ElementRef;
-
   progress: { percentage: number } = { percentage: 0 };
   selectedFiles: FileList;
   imagePreview;
@@ -31,8 +31,8 @@ export class UploadComponent implements OnInit, OnDestroy {
   imagesVisible = true;
   uploading: boolean;
   resetSub;
-  sub1;
-  sub2;
+
+
   constructor(
     private uploadService: UploadFileService,
     private ng2ImgMax: Ng2ImgMaxService,
@@ -81,7 +81,7 @@ export class UploadComponent implements OnInit, OnDestroy {
     const file = event.target.files.item(0);
     const imageId = generateId();
 
-    this.sub1 = this.ng2ImgMax.resizeImage(file, 550, 10000).subscribe(
+     this.ng2ImgMax.resizeImage(file, 550, 10000).subscribe(
       result => {
         this.uploadSmalledImage = new File([result], 'size-550-' + imageId + result.name);
         this.getImagePreview(this.uploadSmalledImage);
@@ -91,7 +91,7 @@ export class UploadComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.sub2 = this.ng2ImgMax.resizeImage(file, 800, 10000).subscribe(
+     this.ng2ImgMax.resizeImage(file, 800, 10000).subscribe(
       result => {
         this.uploadedLargeImage = new File([result], 'size-800-' + imageId + result.name);
         this.getImagePreview(this.uploadedLargeImage);
@@ -110,6 +110,9 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   upload() {
     this.uploading = true;
+    const file = this.selectedFiles.item(0);
+    this.selectedFiles = undefined;
+    
     this.uploadService.pushFileToStorage(this.uploadSmalledImage, this.progress);
     this.uploadService.pushFileToStorage(this.uploadedLargeImage, this.progress);
   }
