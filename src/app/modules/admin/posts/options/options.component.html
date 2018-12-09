@@ -1,0 +1,12 @@
+<div class="float-right">
+  <a class="btn btn-c  btn-c-link" [routerLink]="['/posts', post.id]"
+    ><i class="far fa-eye"></i> <span class=" d-none d-sm-inline ml-2">View post</span>
+  </a>
+  <a class="btn btn-c  btn-c-link" routerLink="edit-post/{{post.id}}"
+    ><i class="far fa-edit"></i> <span class=" d-none d-sm-inline ml-2">Edit</span>
+  </a>
+  <button (click)="togglePanel[post.publishDate] = !togglePanel[post.publishDate]" class="btn btn-c-link btn-c">
+    <i class="fas fa-trash-alt"></i> <span class=" d-none d-sm-inline ml-2">Delete</span>
+  </button>
+  <ng-content></ng-content>
+</div>

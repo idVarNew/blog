@@ -1,0 +1,20 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+.post-image {
+  width: 500px;
+  &-wrapper {
+    position: relative;
+
+  }
+  &-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+@include media-breakpoint-up(sm) {
+    .post-image {
+        width: 150px;
+    }
+  }

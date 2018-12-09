@@ -1,0 +1,9 @@
+<nav class="d-flex justify-content-between post-nav mb-5">
+  <button (click)="prevPost()" [disabled]="postsStarts" class="btn btn-c  post-nav-button">
+    <span *ngIf="!postsStarts"> Previous </span> <span *ngIf="postsStarts"> Start </span>
+  </button>
+
+  <button (click)="nextPost()" [disabled]="postsEnds" class="btn btn-c  post-nav-button">
+    <span *ngIf="!postsEnds"> Next </span> <span *ngIf="postsEnds"> End </span>
+  </button>
+</nav>

@@ -1,0 +1,20 @@
+<div *ngIf="(post?.img.large)[0]" class="d-block post-images">
+  <img [src]="(post?.img.large)[imgIndex].url" [alt]="(post?.img.large)[0].name" class="post-image" />
+  <div class="post-img-nav">
+    <button
+      (click)="prevImage()"
+      [disabled]="(post?.img.large)[imgIndex - 1] === undefined ? true: false"
+      class="btn btn-c  btn btn-c -link post-image-next"
+    >
+      <i class="fas fa-angle-double-left"></i>
+    </button>
+    <span> {{ imgIndex+1 }} / {{ post.img.small.length }} </span>
+    <button
+      (click)="nextImage()"
+      [disabled]="(post?.img.large)[imgIndex + 1] === undefined ? true: false"
+      class="btn btn-c  btn btn-c -link post-image-next"
+    >
+    <i class="fas fa-angle-double-right"></i>
+    </button>
+  </div>
+</div>

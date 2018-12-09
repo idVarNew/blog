@@ -1,0 +1,43 @@
+<div>
+  <h2>Comments ({{ sortedComments.length }})</h2>
+  <ul class="posts-list list-group mt-4" *ngIf="sortedComments.length; else: notFound">
+    <li
+      *ngFor="let comment of sortedComments"
+      class="list-group-item d-sm-flex  align-items-center justify-content-between mb-2"
+    >
+      <p class="mb-0 col-sm-8 col-lg-9">{{ comment.comment }}</p>
+
+      <div class="col-sm-4 col-lg-3 text-right">
+        <a [routerLink]="['/posts', comment.id]" class="btn btn-c  btn-c-link">
+          <i class="far fa-eye"></i><span class=" d-none d-sm-inline ml-2">View</span>
+        </a>
+
+        <button (click)="togglePanel[comment.id] = !togglePanel[comment.id]" class="btn btn-c  btn-c-link">
+          <i class="fas fa-trash-alt"></i><span class=" d-none d-sm-inline ml-2">Delete</span>
+        </button>
+      </div>
+
+      <div *ngIf="togglePanel[comment.id]" [class.alert-modal-overly]="">
+        <div *ngIf="togglePanel[comment.id]" class="alert-modal">
+       <p class="d-block">
+          Are you sure to delete this?
+       </p>  
+          <button
+            (click)="deleteComment(comment.id, comment.comment); togglePanel[comment.id] = !togglePanel[comment.id]"
+            class="btn btn-c ml-3"
+          >
+            Yes
+          </button>
+          <button (click)="togglePanel[comment.id] = !togglePanel[comment.id]" class="btn mr-3 btn-c">
+            Cancal
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #notFound>
+      <br />
+      <span> Comments not found</span>
+    </ng-template>
+</div>

@@ -1,0 +1,21 @@
+<div class="part mb-4">
+  <ng-container *ngIf="post?.img.small.length >= 5 ? false : true">
+    <label for="post-images" class="d-block h6 font-weight-bold  mr-3">Add an image </label>
+    <input type="file" id="post-images" (change)="selectFile($event)" accept="image/*" #fileUploader class="mb-3" />
+  </ng-container>
+
+  <ng-container *ngIf="imagePreview">
+    <img [src]="sanitizer.bypassSecurityTrustUrl(imagePreview)" class="image-preview mb-3" />
+  </ng-container>
+  <app-progress-bar [imagePreview]="imagePreview" [progress]="progress"></app-progress-bar>
+  <button type="button" class="btn btn-success" *ngIf="selectedFiles" (click)="upload()">Upload</button>
+  <br />
+</div>
+
+<div class="card p-2 border-0" *ngIf="post?.img.small.length">
+  <app-post-images
+    [post]="post"
+    (deleteImageFromEditPostEE)="deleteImageFromEditPost($event)"
+    (setCoverPhotoEE)="setCoverPhoto($event)"
+  ></app-post-images>
+</div>

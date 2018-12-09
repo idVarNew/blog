@@ -1,0 +1,29 @@
+<div>
+  <h2>Edit Post</h2>
+  <form class="admin-form mt-4" [formGroup]="NewPostForm" (ngSubmit)="onSubmit()">
+    <app-title [NewPostForm]="NewPostForm" [post]="post"></app-title>
+    <app-description [NewPostForm]="NewPostForm" [post]="post"></app-description>
+    <app-labels
+      [post]="post"
+      [labels]="labels"
+      [allLabels]="allLabels"
+      (removeLabelEE)="removeLabel($event)"
+      (addNewLabelEE)="addNewLabel($event)"
+      (addPrevLabelEE)="addPrevLabel($event)"
+    ></app-labels>
+    <app-upload
+    [param]="param"
+      [post]="post"
+      (deleteImageFromEditPostEE)="deleteImageFromEditPost($event)"
+      (setCoverPhotoEE)="setCoverPhoto($event)"
+    ></app-upload>
+  <div class="mt-4">
+    <button type="submit" [disabled]="NewPostForm.invalid" class="btn btn-lg btn-success mr-3">
+      Save Changes
+    </button>
+    <a routerLink="/admin/posts" class="btn btn-lg btn-success">Cancal</a>
+  </div>
+
+    
+  </form>
+</div>

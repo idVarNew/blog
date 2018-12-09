@@ -1,0 +1,43 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+.post {
+  &-title {
+    font-size: 0.9rem;
+  }
+  &-item {
+    &:hover {
+      .post-link {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.alert-modal {
+  width: 90%;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  padding: 25px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  z-index: 1000;
+  transform: translate(-50%, -50%);
+  &-overly {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 99998;
+  }
+}
+
+@include media-breakpoint-up(md) {
+  .alert-modal {
+    width: 350px;
+  }
+}

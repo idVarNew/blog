@@ -1,0 +1,28 @@
+<div>
+  <h2>Posts ({{ posts.length }})</h2>
+  <a class="btn btn-success mb-5 mt-4" [routerLink]="['/admin/new-post']">New Post</a>
+
+  <ul class="post-list list-group " *ngIf="posts.length; else: notFound">
+    <li
+      *ngFor="let post of posts; let i = index"
+      class="post-item list-group-item d-md-flex  align-items-center justify-content-between"
+    >
+      <a class="post-link" routerLink="edit-post/{{post.id}}">
+        <h3 class="post-title mb-0">{{ post.title }}</h3>
+      </a>
+      <app-options [post]="post" [togglePanel]="togglePanel">
+        <app-alert
+          *ngIf="togglePanel[post.publishDate]"
+          (deletePostEE)="deletePost($event)"
+          [post]="post"
+          [togglePanel]="togglePanel"
+        ></app-alert>
+      </app-options>
+    </li>
+  </ul>
+
+  <ng-template #notFound>
+    <br />
+    <span> Posts not found</span>
+  </ng-template>
+</div>

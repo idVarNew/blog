@@ -1,0 +1,13 @@
+<ngx-masonry #masonry [useImagesLoaded]="true" [options]="{ transitionDuration: '0.2' }">
+  <ng-container *ngFor="let post of (posts | paginate: { itemsPerPage: 10, currentPage: p }); let i = index">
+    <ngxMasonryItem class="masonry-item" #masonryItem [class.no-image]="post.img.small.length === 0">
+     
+ <app-post-card [post]="post" [i]="i" [postLikes]="postLikes" (likePostEE)="likePost($event)"></app-post-card>
+ 
+    </ngxMasonryItem>
+  </ng-container>
+  
+</ngx-masonry>
+
+<pagination-controls *ngIf="posts.length" (pageChange)="p = $event" class="text-center d-block mt-5 mb-5"></pagination-controls>
+

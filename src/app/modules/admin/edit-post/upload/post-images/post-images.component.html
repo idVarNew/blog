@@ -1,0 +1,23 @@
+<div class="post-images d-flex flex-wrap">
+  <div *ngFor="let image of post?.img.small; let i = index" class="post-image-wrapper  mb-2 mr-sm-2">
+    <img src="{{image.url}}" alt="{{image.name}}" class="post-image" />
+    <div>
+      <button
+        class="btn btn-c  post-image-delete"
+        type="button"
+        (click)="deleteImageFromEditPost(image.name, i, post.id)"
+        aria-label="Delete image"
+      >
+        <i class="fas fa-times"></i>
+      </button>
+      <button
+        class="btn btn-c "
+        type="button"
+        *ngIf="post.img.small.length < 2 || i === 0 ? false : true"
+        (click)="setCoverPhoto(image.name, i, post.id)"
+      >
+        cover photo
+      </button>
+    </div>
+  </div>
+</div>

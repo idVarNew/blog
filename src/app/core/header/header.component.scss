@@ -1,0 +1,16 @@
+.main-header {
+  padding: 75px 0 58px;
+}
+.page-title {
+  font-size: 2.5rem;
+  &-tagline{
+    font-size: 1.0rem
+  }
+}
+.admin-link{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 15px 25px;
+  background-color: #fff;
+}

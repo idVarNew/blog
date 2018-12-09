@@ -1,0 +1,30 @@
+.part{
+    border: 1px solid #fff;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.btn {
+    &-label {
+      font-size: 0.7rem;
+      padding: 3px 7px;
+      margin-right: 3px;
+    }
+    &-add-label {
+      font-size: 0.8rem;
+    }
+    &-edit {
+      font-size: 0.7rem;
+      font-style: italic;
+      position: absolute;
+      top: 15px;
+      right: 1px;
+    }
+    &-times-circle {
+      padding: 0;
+      margin-top: -10px;
+    }
+  }
+  

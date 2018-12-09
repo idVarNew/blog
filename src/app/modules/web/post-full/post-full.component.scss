@@ -1,0 +1,29 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+.post {
+  &-full-part {
+    background-color: #fff;
+    padding: 25px 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 4px 8px 0 rgba(0, 0, 0, 0.02);
+  }
+  &-wrapper {
+    @include media-breakpoint-up(lg) {
+      max-width: 1050px;
+    }
+    margin: 0 auto;
+  }
+  &-description {
+    line-height: 1.8;
+    font-size: 0.8rem;
+  }
+  &-images {
+    position: relative;
+  }
+  &-img-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+

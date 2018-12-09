@@ -1,0 +1,10 @@
+@import '../post-full.component.scss';
+
+.comments {
+  &-item {
+    border-bottom: 1px dotted #efefef;
+  }
+  &-date {
+    font-size: 0.7rem;
+  }
+}

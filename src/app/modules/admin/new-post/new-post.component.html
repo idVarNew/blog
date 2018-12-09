@@ -1,0 +1,19 @@
+<div>
+  <h2>New Post</h2>
+  <form class="admin-form mt-4" [formGroup]="NewPostForm" (ngSubmit)="onSubmit()">
+    <app-title [NewPostForm]="NewPostForm"></app-title>
+    <app-description [NewPostForm]="NewPostForm"></app-description>
+
+    <app-labels
+      [labels]="labels"
+      [allLabels]="allLabels"
+      (removeLabelEE)="removeLabel($event)"
+      (addNewLabelEE)="addNewLabel($event)"
+      (addPrevLabelEE)="addPrevLabel($event)"
+    ></app-labels>
+    <app-upload (setCoverPhotoEE)="setCoverPhoto($event)"></app-upload>
+    <button type="submit" [disabled]="NewPostForm.invalid" class="btn btn-lg btn-success">
+      Publish
+    </button>
+  </form>
+</div>

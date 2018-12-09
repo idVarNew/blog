@@ -1,0 +1,29 @@
+<div class="container">
+  <span *ngIf="isLogIn"> You are logged in </span>
+
+  <article *ngIf="!isLogIn" class="login-card border-0">
+    <header class="login-card-header p-3 text-white">
+      <h1 class="login-title h3 text-center mb-0 mt-1"><ng-container *ngIf="!visible">Log In</ng-container></h1>
+    </header>
+    <div class="login-card-main p-4 pt-5">
+     
+      <form [formGroup]="loginForm">        
+        <app-email [loginForm]="loginForm"></app-email>
+        <app-password [loginForm]="loginForm"></app-password>
+        <p *ngIf="messageError" class="alert alert-danger">{{ messageError }}</p>
+        <button
+          *ngIf="!visible"
+          [disabled]="loginForm.invalid"
+          type="submit"
+          class="login-card-button d-block btn"
+          (click)="signIn()"
+        >
+          Log in <span *ngIf="spinner" class="spinner"> <i class="fas fa-spinner"></i></span>
+        </button>
+      </form>
+
+
+    </div>
+    <footer><a class="pl-3 text-center mb-3 d-block" routerLink="/forgot-password"> Forgot passoword </a></footer>
+  </article>
+</div>

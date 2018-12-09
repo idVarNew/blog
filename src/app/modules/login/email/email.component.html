@@ -1,0 +1,24 @@
+<div class="email-field mb-4" [formGroup]="loginForm">
+    <label class="sr-only" for="inlineFormInputGroupUsername">Email</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <div class="input-group-text"><i class="fas fa-at"></i></div>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        id="inlineFormInputGroupUsername"
+        id="login-form-email"
+        placeholder="myemail@email.com"
+        name="email"
+        formControlName="email"
+        autocomplete="email"
+        email
+        required
+      />
+    </div>
+    <div *ngIf="emailControl.invalid && (emailControl.dirty || emailControl.touched)" class="alert alert-danger">
+      <small *ngIf="emailControl.errors.required">Email is required</small>
+      <small *ngIf="emailControl.errors.email">Please provide valid email</small>
+    </div>
+  </div>

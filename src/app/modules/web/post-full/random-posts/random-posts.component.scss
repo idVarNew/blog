@@ -1,0 +1,16 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+.random-post-title{
+    font-size: 0.8rem
+}
+
+@include media-breakpoint-down(lg) {
+  .random-post {
+    &-2 {
+      width: 48%;
+    }
+    &-3 {
+      width: 30%;
+    }
+  }
+}

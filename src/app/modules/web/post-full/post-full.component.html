@@ -1,0 +1,44 @@
+<div class="post-wrapper">
+  <article>
+    <div class="post-full-part d-lg-flex justify-content-between">
+      <div class="col-lg-10">
+        <div class="pr-lg-4">
+          <header class="mb-3 d-lg-flex justify-content-between">
+            <h2 class="col-lg-10">{{ post?.title }}</h2>
+            <time class="col-lg-2 text-right"> {{ post?.publishDate | date }}</time>
+          </header>
+          <div>
+            <app-images
+              [imgIndex]="imgIndex"
+              [post]="post"
+              (nextImageEE)="nextImage()"
+              (prevImageEE)="prevImage()"
+            ></app-images>
+
+            <p class="post-description pt-4">{{ post?.description }}</p>
+          </div>
+          <app-labels (filterByLabelEE)="filterByLabel($event)" [post]="post"></app-labels>
+        </div>
+      </div>
+
+      <aside class="col-lg-2">
+        <app-social (likePostEE)="likePost($event)" [post]="post"></app-social>
+        <app-random-posts [randomPostsList]="randomPostsList"></app-random-posts>
+      </aside>
+    </div>
+
+    <app-comments
+      [postComments]="postComments"
+      [commentsForm]="commentsForm"
+      (submitEE)="submit($event)"
+      [post]="post"
+    ></app-comments>
+
+    <app-post-navigation
+      (prevPostEE)="prevPost()"
+      (nextPostEE)="nextPost()"
+      [postsStarts]="postsStarts"
+      [postsEnds]="postsEnds"
+    ></app-post-navigation>
+  </article>
+</div>

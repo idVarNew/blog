@@ -1,0 +1,36 @@
+@import '~bootstrap/scss/bootstrap-grid.scss';
+
+.admin {
+  height: 100vh;
+  &-wrapper {
+    height: 90vh;
+  }
+  &-bar {
+    background-color: #fff;
+    padding: 10px 15px;
+    box-shadow: 0 0.15rem 0.125rem 0 rgba(0, 0, 0, 0.05);
+    z-index: 1;
+    position: relative;
+    &-text {
+      font-size: 0.8rem;
+    }
+    &-links {
+      & > * {
+        margin-right: 10px;
+      }
+    }
+  }
+  &-sidebar {
+    background-color: #fff;
+  }
+}
+
+
+@include media-breakpoint-up(md) {
+  .btn-nav-toggle {
+    display: none;
+  }
+  .admin-sidebar {
+    display: block !important;
+  }
+}

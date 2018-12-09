@@ -1,0 +1,57 @@
+<div class="post-full-part">
+  <article>
+    <h3 class="sr-only">Comments</h3>
+
+    <ul class="comments-list">
+      <li *ngFor="let comment of postComments?.comments" class="comments-item mb-2">
+        <ng-container *ngIf="post.comments">
+          <cite class="font-weight-bold"> {{ comment?.author }}</cite>
+          <time class="float-right comment-date" [attr.datetime]="comment?.publishDate | date">
+            {{ comment?.publishDate | date }}
+          </time>
+          <p class="comment-text">{{ comment?.comment }}</p>
+        </ng-container>
+      </li>
+    </ul>
+
+    <button *ngIf="!comments" (click)="comments = !comments" class="btn btn-c ">Add new comment</button>
+
+    <form *ngIf="comments" [formGroup]="commentsForm" (ngSubmit)="onSubmit()">
+      <label for="comment-author" class="post-form-comments">Author</label>
+      <input type="text" class="form-control" id="comment-author" formControlName="author" #author />
+
+      <div *ngIf="authorControl.invalid && (authorControl.dirty || authorControl.touched)" class="alert alert-danger">
+        <div *ngIf="authorControl.errors.required">Author is required.</div>
+        <div *ngIf="authorControl.errors.maxlength">Author must be max 50 characters long.</div>
+      </div>
+
+      <label for="comment-text" class="post-form-comments">Comment</label>
+      <textarea
+        id="comment-text"
+        class="form-control comments"
+        formControlName="comment"
+        aria-label="Add comment"
+        #comment
+      ></textarea>
+      <div
+        *ngIf="commentControl.invalid && (commentControl.dirty || commentControl.touched)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="commentControl.errors.required">Comment is required.</div>
+        <div *ngIf="commentControl.errors.maxlength">Comment must be max 500 characters long.</div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-c"
+        [disabled]="
+          commentsForm.invalid ||
+          (comment.value.length === 0 || comment.value.trim() === '') ||
+          (authorControl.value.length === 0 || authorControl.value.trim() === '')
+        "
+      >
+        Add comment
+      </button>
+    </form>
+  </article>
+</div>

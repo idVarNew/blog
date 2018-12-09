@@ -1,0 +1,43 @@
+<div class="part part-4 form-group">
+  <label for="post-labels" class="group-title h6 font-weight-bold">Labels</label>
+
+  <div class="mb-3 " *ngIf="labels">
+    <span class="font-weight-bold d-block  mr-3">Post labels: </span>
+    <div class="group-labels d-flex flex-wrap">
+      <span *ngFor="let label of labels" class="mr-4">
+        {{ label }}
+        <button type="button" class="btn btn-link p-0 btn-times-circle" (click)="removeLabel(label)">
+          <i class="fas fa-times-circle"></i>
+        </button>
+      </span>
+    </div>
+  </div>
+
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control label-input border-0"
+      placeholder="label name"
+      (input)="enable()"
+      aria-label="label"
+      aria-describedby="button-add-label"
+      #labelValue
+    />
+
+    <div class="input-group-append">
+      <button
+        class="btn btn-c  btn btn-c -secondary btn btn-c -add-label"
+        [disabled]="labelValue.value.length === 0 || labelValue.value.trim() === ''"
+        (click)="addNewLabel(labelValue)"
+        type="button"
+        id="button-add-label"
+      >
+        Add Label
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="allLabels.length">
+    <app-label-tags [labels]="allLabels" (emitLabelEE)="addPrevLabel($event)"></app-label-tags>
+  </div>
+</div>

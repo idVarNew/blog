@@ -1,0 +1,16 @@
+<div class="admin-bar d-flex align-items-center justify-content-between">
+  <h2 class="mb-0">Blog</h2>
+  <div class="admin-bar-links">
+    <button (click)="changeNavVisible()" class="btn-c btn-c-link btn-nav-toggle" aria-label="Toggle menu">
+      <i *ngIf="!navVisible" class="fas fa-bars"></i> <i *ngIf="navVisible" class="fas fa-times"></i>
+    </button>
+    <span class="admin-bar-text d-none d-sm-inline"><i class="fas fa-user"></i> {{ userEmail }} </span>
+    <a  class="btn-c btn-c-link" routerLink="">
+        <i class="far fa-eye"></i>  <span class="admin-bar-text d-none d-sm-inline"> View blog </span>
+    </a>
+    <button class="btn-c btn-c-link">
+      <span class="admin-bar-text d-none d-sm-inline" (click)="logout()">Logout </span> <i class="fas fa-sign-out-alt"></i>
+    </button>
+   
+  </div>
+</div>

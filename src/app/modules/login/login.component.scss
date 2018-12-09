@@ -1,0 +1,46 @@
+.login-card {
+  width: 35%;
+  transition: all 0.2s;
+  transform: translateY(0);
+  background-color: #fff;
+  border-radius: 10px;
+  &:hover {
+    transform: translateY(-1);
+     box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.2s;
+  }
+  &-button {
+    width: 100%;
+  }
+    &-header {
+    background-color: #b3b055;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+}
+.container {
+  max-width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.spinner {
+  margin: 10px 10px 0 15px;
+  i {
+    animation: spinner 1s linear infinite;
+    position: absolute;
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(360deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

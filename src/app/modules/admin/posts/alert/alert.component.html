@@ -1,0 +1,9 @@
+<div  [class.alert-modal-overly]="togglePanel[post.publishDate]">
+    <div *ngIf="togglePanel[post.publishDate]" class="alert-modal">
+        <p class="d-block">
+            Are you sure to delete this?
+         </p>  
+        <button (click)="deletePost(post.id)" class="btn btn-c   mr-3">Yes</button>
+      <button (click)="togglePanel[post.publishDate] = !togglePanel[post.publishDate]" class="btn btn-c ">Cancal</button>
+    </div>
+  </div>

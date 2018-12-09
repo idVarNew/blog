@@ -1,0 +1,20 @@
+<div>
+  <h2>Settings</h2>
+  <form [formGroup]="settingsForm" (ngSubmit)="onSubmit()" class="mt-4">
+    <div><label for="blog-title">Blog name</label> 
+      <input class="w-100 form-control mb-3 border-0" id="blog-title" type="text" formControlName="title" />
+    </div>
+
+    <div>
+      <label for="blog-description">Blog description</label>
+      <input class="w-100 form-control mb-3 border-0" id="blog-description" type="text" formControlName="description" />
+    </div>
+
+    <div>
+      <label for="blog-author">Author</label> 
+      <input class="w-100 form-control mb-3 border-0" id="blog-author" type="text" formControlName="author" />
+    </div>
+
+    <button type="submit" [disabled]="settingsForm.invalid" class="btn btn-success btn-lg">Save Changes</button>
+  </form>
+</div>
