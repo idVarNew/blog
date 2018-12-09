@@ -23,7 +23,6 @@ export function Posts(state = Store.posts, action: AppActions.PostsActions) {
       ];
 
     case AppActions.EDIT_POST:
-
       return state.map((post: PostModel) => {
         if (post.id === action.payload.id) {
           return {
@@ -69,7 +68,6 @@ export function Posts(state = Store.posts, action: AppActions.PostsActions) {
         }
       });
     case AppActions.DELETE_COMMENT:
-   
       return state.map((post: PostModel) => {
         if (post.id === action.payload.id) {
           return {
@@ -87,8 +85,6 @@ export function Posts(state = Store.posts, action: AppActions.PostsActions) {
       return state.filter((post: PostModel) => {
         return post.id !== action.payload;
       });
-    case AppActions.SET_COVER_PHOTO:
-      return state
 
     case AppActions.DELETE_POST_IMAGE:
       return state.map((post: PostModel) => {
@@ -101,7 +97,7 @@ export function Posts(state = Store.posts, action: AppActions.PostsActions) {
           return post;
         }
       });
-      case AppActions.LIKE_POST:
+    case AppActions.LIKE_POST:
       return state.map((post: PostModel) => {
         if (post.id === action.payload) {
           return {

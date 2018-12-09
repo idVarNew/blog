@@ -12,7 +12,6 @@ export const LOAD = '[posts] LOAD';
 export const ADD_COMMENT = '[posts] ADD COMMENT';
 export const DELETE_COMMENT = '[posts] DELETE_COMMENT';
 export const DELETE_POST_IMAGE = '[posts] DELETE_POST_IMAGE';
-export const SET_COVER_PHOTO = '[posts] SET_COVER_PHOTO';
 export const LIKE_POST = '[posts] LIKE_POST';
 
 
@@ -66,10 +65,7 @@ export class deletePostImage implements Action {
   readonly type = DELETE_POST_IMAGE;
   constructor(public payload: { imageToDelete: any; postId: string }) {}
 }
-export class setCoverPhoto implements Action {
-  readonly type = SET_COVER_PHOTO;
-  constructor(public payload: { imageName: string; index: number}) {}
-}
+
 export class likePost implements Action {
   readonly type = LIKE_POST;
   constructor(public payload : string) {}
@@ -88,5 +84,4 @@ export type PostsActions =
   | addComment
   | deleteComment
   | deletePostImage
-  | setCoverPhoto
   | likePost;
