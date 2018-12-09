@@ -1,12 +1,16 @@
-@import "../posts/posts.component.scss";
-
-.post{
-    &-summary-title {
-      color: #9e7e6b;
-      font-size: 0.8rem;
-  
-    }
-    &-cover {
-      width: 100%;
-    }
+@import '../posts/posts.component.scss';
+h2 {
+  &:hover {
+    text-decoration: none;
   }
+}
+.post {
+
+  &-summary-title {
+    color: #9e7e6b;
+    font-size: 0.8rem;
+  }
+  &-cover {
+    width: 100%;
+  }
+}
