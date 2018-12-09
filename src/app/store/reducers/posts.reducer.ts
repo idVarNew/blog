@@ -8,7 +8,6 @@ export function Posts(state = Store.posts, action: AppActions.PostsActions) {
       return [].concat(action.payload['posts']);
 
     case AppActions.ADD_NEW_POST:
-    console.log("add new post")
       return [
         {
           id: action.payload.id,
@@ -25,10 +24,8 @@ export function Posts(state = Store.posts, action: AppActions.PostsActions) {
 
     case AppActions.EDIT_POST:
 
-     console.log("edit post")
       return state.map((post: PostModel) => {
         if (post.id === action.payload.id) {
-          console.log("edit post" + post.id) 
           return {
             ...post,
             title: action.payload.post.title,
@@ -37,7 +34,6 @@ export function Posts(state = Store.posts, action: AppActions.PostsActions) {
             img: Object.assign({}, action.payload.post.img)
           };
         } else {
-          console.log("nie dotyczy") 
           return post;
         }
       });

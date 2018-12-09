@@ -37,7 +37,6 @@ export class EditPostComponent implements OnInit, OnDestroy {
         switchMap((param: ParamMap) => {
           return this.store.select('posts').pipe(
             tap((posts: Array<PostModel>) => {
-              console.log(posts)
               this.getAllLabels(posts);
             }),
 
@@ -47,7 +46,6 @@ export class EditPostComponent implements OnInit, OnDestroy {
                   this.param = param.get('id');
                   this.labels = post.labels
                   this.post =  post;
-                  console.log(post.labels)
                   this.imageFiles = this.post['img'];
                   return post;
                 }
@@ -98,14 +96,12 @@ export class EditPostComponent implements OnInit, OnDestroy {
       if (smallSize === false && this.post.img.small.length < 5) {
         if (image['url'].includes('size-550-')) {
           this.imageFiles.small.push(this.generateSizeVersions(image));
-          console.log('samll');
         }
       }
 
       if (largeSize === false && this.post.img.large.length < 5) {
         if (image['url'].includes('size-800-')) {
           this.imageFiles.large.push(this.generateSizeVersions(image));
-          console.log('large');
         }
       }
     }

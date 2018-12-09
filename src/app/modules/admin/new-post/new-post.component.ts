@@ -47,13 +47,10 @@ export class NewPostComponent implements OnInit {
     });
 
     this.uploadService.downloadURL.subscribe((image: PostImageModel) => {
-      console.log(image);
       if (image['url'].includes('size-550-')) {
         this.imageFiles.small.push(this.generateSizeVersions(image));
-        console.log('mały');
       } else {
         this.imageFiles.large.push(this.generateSizeVersions(image));
-        console.log('duży');
       }
     });
   }

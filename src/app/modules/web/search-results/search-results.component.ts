@@ -25,9 +25,7 @@ export class SearchResultsComponent implements OnInit {
         switchMap(params => {
           return this.store.pipe(select('posts')).pipe(
             map((posts: Array<PostModel>) => {
-              console.log(posts)
               return posts.filter((post: PostModel) => {
-                console.log(post)
                 if (post.labels.indexOf(params['label']) > -1) {
                   return post;
                 }

@@ -15,7 +15,6 @@ export class UploadFileService {
   uploadeImages = new Subject();
 
   constructor(private db: AngularFireDatabase) {
-    console.log("drugi serwis")
   }
 
   pushFileToStorage(fileUpload, progress: { percentage: number }) {
