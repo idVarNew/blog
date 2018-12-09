@@ -25,7 +25,7 @@ export class PostsService {
   }
 
   getAllPosts(): Observable<Array<PostModel>> {
-    this.itemsRef$ = this.af.list(`store/${'blog'}`);
+    this.itemsRef$ = this.af.list(`store/${'blogsample'}`);
 
     return this.itemsRef$.snapshotChanges().pipe(
       map((changes: Array<any>) => {
