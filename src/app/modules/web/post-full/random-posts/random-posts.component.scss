@@ -4,7 +4,7 @@
     font-size: 0.8rem
 }
 
-@include media-breakpoint-down(lg) {
+@include media-breakpoint-down(md) {
   .random-post {
     &-2 {
       width: 48%;
