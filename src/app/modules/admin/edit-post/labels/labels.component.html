@@ -3,7 +3,7 @@
 
   <div class="mb-3 " *ngIf="labels">
     <span class="font-weight-bold d-block  mr-3">Post labels: </span>
-    <div class="group-labels d-flex flex-wrap">
+    <div class="group-labels d-flex flex-wrap mt-2">
       <span *ngFor="let label of labels" class="mr-4">
       {{ label }}
         <button type="button" class="btn btn-link p-0 btn-times-circle" (click)="removeLabel(label)">
