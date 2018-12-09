@@ -6,7 +6,7 @@ This is a simple blog using Angular6 and Firebase. It is just for one user
 
 LIVE VERSION: http://frontendowiec.com/diary1/posts
 
-You can login in  and check how it is work:
+You can login and check how it is work:
 
 http://frontendowiec.com/diary2/login
 email: sample@sampleblog.com
