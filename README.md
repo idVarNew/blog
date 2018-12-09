@@ -1,37 +1,21 @@
-# diary app
+# Blog app
 
 ## About Project
 
-Yes, that is right. This is another to do list app!
+This is a simple blog using Angular6 and Firebase. It is just for one user
 
-This diary app allows you to do the following things:
+LIVE VERSION: http://frontendowiec.com/diary1/posts
 
-- create an account / login
-- reset password
-- delete account
-- create a new task:
-  --- description
-  --- due date
-  --- importance
-  --- labels
-  --- colors
-- delete task
-- add comments to task
-- remove comments
-- filter by 'category'
-- sort by 'due date'
-- search
-- edit task:
-  --- status
-  --- description
-  --- due date
-  --- importance
-  --- labels
-  --- colors
+You can login in  and check how it is work:
 
-LIVE VERSION: http://frontendowiec.com/diaryapp/
+http://frontendowiec.com/diary2/login
+email: sample@sampleblog.com
+password: 258741
 
-![myimage-alt-tag](https://github.com/idVarNew/diaryapp/blob/master/src/assets/diaryapp.jpg?raw=true)
+![myimage-alt-tag](https://github.com/idVarNew/blog/blob/master/src/assets/cover1.jpg?raw=true)
+![myimage-alt-tag](https://github.com/idVarNew/blog/blob/master/src/assets/cover2.jpg?raw=true)
+![myimage-alt-tag](https://github.com/idVarNew/blog/blob/master/src/assets/cover3.jpg?raw=true)
+
 
 ## TECHNOLOGIES
 
