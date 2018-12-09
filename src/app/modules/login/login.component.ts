@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
         });
     }else{
       this.spinner = false;
-      this.messageError = "This is a demo version. Please use this email: sample@sampleblog.com to login"
+      this.messageError = "This is a demo version. Please use this email: sample@sampleblog.com"
     }
   }
 }

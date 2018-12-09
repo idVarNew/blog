@@ -9,7 +9,7 @@ export class ProgressBarComponent implements OnInit {
   @Input()
   progress: { percentage: number };
   @Input()
-  uploading
+  uploading: boolean
 
   constructor() {}
 
