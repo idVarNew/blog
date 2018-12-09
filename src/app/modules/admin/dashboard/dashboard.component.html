@@ -1,14 +1,12 @@
 <div>
   <h2>Dashboard</h2>
-
   <a class="btn btn-success mt-4 mb-5" [routerLink]="['/admin/new-post']">Create new post</a>
-
   <div class="blog-activity d-md-flex justify-content-between">
     <article class="col-md-6"  *ngIf="true">
       <h4 class="mb-3">Last posts</h4>
       <div class="post-intro card mb-2 border-0" *ngFor="let post of posts; let i = index">
         <div class="d-flex justify-content-between align-items-center" *ngIf="i < 3">
-          <h5 class="pl-3">{{ post.title }}</h5>
+          <h5 class="p-3 mb-0">{{ post.title }}</h5>
           <ng-container *ngIf="post.img.small[0]">
             <img [src]="post.img.small[0].url" [alt]="post.img.small[0].name" class="post-cover" />
           </ng-container>
