@@ -17,20 +17,10 @@ const routes: Routes = [
     loadChildren: './modules/admin/admin.module#AdminModule',
     canActivate: [AuthenticationGuardService]
   },
- 
-  {
+   {
     path: '',
     loadChildren: './modules/web/web.module#WebModule',
-   // canActivate: [AuthenticationGuardService],  
   },
-  /*
-  {
-    path: '',
-    loadChildren: './modules/posts/posts.module#PostsModule',
-    canActivate: [AuthenticationGuardService]
-  },
-  */
-
   {
     path: '**',
     redirectTo: '/'
