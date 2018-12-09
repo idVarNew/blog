@@ -4,7 +4,7 @@
     <input type="file" id="post-image" (change)="selectFile($event)" accept="image/*" #fileUploader class="mb-3" />
   </ng-container>
 
-  <ng-container *ngIf="imagePreview">
+  <ng-container *ngIf="uploading">
     <img [src]="sanitizer.bypassSecurityTrustUrl(imagePreview)" class="image-preview mb-3" />
   </ng-container>
   <app-progress-bar [uploading]="uploading"  [progress]="progress"></app-progress-bar>
@@ -13,6 +13,6 @@
   <br />
 
   <div class="card p-2 border-0">
-    <app-uploaded-images  (setCoverPhotoEE)="setCoverPhoto($event)" [allUploaded]="allUploaded" (deleteImageFromNewPostEE)="deleteImageFromNewPost($event)"></app-uploaded-images>
+    <app-uploaded-images  [imageFiles]="imageFiles" (setCoverPhotoEE)="setCoverPhoto($event)" (deleteImageFromNewPostEE)="deleteImageFromNewPost($event)"></app-uploaded-images>
   </div>
 </div>

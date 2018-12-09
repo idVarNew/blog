@@ -13,22 +13,24 @@ export class UploadComponent implements OnInit, OnDestroy {
   @Input()
   post: PostModel;
   @Input()
+  imageFiles;
+  @Input()
   param;
   @Output()
-  deleteImageFromEditPostEE: EventEmitter<Img> = new EventEmitter<Img>();
+  deleteImageFromEditPostEE: EventEmitter<any> = new EventEmitter<any>();
   @Output()
-  setCoverPhotoEE: EventEmitter<Img> = new EventEmitter<Img>();
+  setCoverPhotoEE: EventEmitter<any> = new EventEmitter<any>();
   @ViewChild('fileUploader')
   fileUploader: ElementRef;
 
   progress: { percentage: number } = { percentage: 0 };
   selectedFiles: FileList;
   imagePreview;
-  allUploaded: Array<PostImageModel> = [];
   uploadSmalledImage: File;
   uploadedLargeImage: File;
   imagesVisible = true;
   uploading: boolean;
+  resetSub;
   sub1;
   sub2;
   constructor(
@@ -38,34 +40,24 @@ export class UploadComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.uploadService.uploadeImages.subscribe((imageFile: PostImageModel) => {
-      if (imageFile['url'].includes('size-550-')) {
-        this.allUploaded.push(imageFile);
+    this.resetSub = this.uploadService.downloadURL.subscribe(image => {
+      if (image['url'].includes('size-800-')) {
         this.resetImageInput();
-        this.uploading = false;
       }
     });
   }
 
   setCoverPhoto(image: { name: string; index: number; postId: string }) {
-    const cover: PostImagesModel = Object.assign({}, this.post.img);
-
-    cover.small.unshift(cover.small.splice(image.index, 1)[0]);
-    cover.large.unshift(cover.large.splice(image.index, 1)[0]);
+    this.setCoverPhotoEE.emit(image)
   }
 
   deleteImageFromEditPost(image: { name: string; index: number; postId: string }) {
-    const imageToDelete: PostImagesModel = Object.assign({}, this.post.img);
-
-    imageToDelete.small.splice(image.index, 1);
-    imageToDelete.large.splice(image.index, 1);
-    this.deleteImageFromEditPostEE.emit({ imageToDelete, postId: image.postId });
-    this.uploadService.deleteFileStorage(image.name);
+    this.deleteImageFromEditPostEE.emit(image);
   }
 
   resetImageInput() {
-    this.imagePreview = false;
     this.fileUploader.nativeElement.value = null;
+    this.uploading = false;
   }
 
   private getImagePreview(file: File) {
@@ -118,15 +110,11 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   upload() {
     this.uploading = true;
-
     this.uploadService.pushFileToStorage(this.uploadSmalledImage, this.progress);
     this.uploadService.pushFileToStorage(this.uploadedLargeImage, this.progress);
   }
 
-  ngOnDestroy() {}
-}
-
-interface Img {
-  imageToDelete: PostImagesModel;
-  postId: string;
+  ngOnDestroy() {
+    this.resetSub.unsubscribe();
+  }
 }

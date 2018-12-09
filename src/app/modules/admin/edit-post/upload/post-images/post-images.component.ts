@@ -26,7 +26,7 @@ export class PostImagesComponent implements OnInit {
   }
 }
 interface img{
-  name: string; 
-  index: number; 
-  postId: string 
+  name?: string; 
+  index?: number; 
+  postId?: string 
 }
