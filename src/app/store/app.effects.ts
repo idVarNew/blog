@@ -38,7 +38,6 @@ export class Effects {
       AppActions.ADD_COMMENT,
       AppActions.DELETE_COMMENT,
       AppActions.DELETE_POST_IMAGE,
-      AppActions.SET_COVER_PHOTO,
       AppActions.DELETE_POST,
       AppActions.LIKE_POST
     ),
