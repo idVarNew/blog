@@ -9,7 +9,7 @@
           <time class="float-right comment-date" [attr.datetime]="comment?.publishDate | date">
             {{ comment?.publishDate | date }}
           </time>
-          <p class="comment-text">{{ comment?.comment }}</p>
+          <p class="comment-text mt-1">{{ comment?.comment }}</p>
         </ng-container>
       </li>
     </ul>
@@ -25,7 +25,7 @@
         <div *ngIf="authorControl.errors.maxlength">Author must be max 50 characters long.</div>
       </div>
 
-      <label for="comment-text" class="post-form-comments">Comment</label>
+      <label for="comment-text" class="post-form-comments mt-3">Comment</label>
       <textarea
         id="comment-text"
         class="form-control comments"
