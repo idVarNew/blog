@@ -116,11 +116,9 @@ describe('Login component', () => {
     }));
   });
 
-  it('should full post create', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should full post create5', () => {
-    expect(true).toBeTruthy();
-  });
+
 });
