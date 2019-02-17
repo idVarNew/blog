@@ -1,3 +1,6 @@
+
+
+
 <div class="post-wrapper">
   <article>
     <div class="post-full-part d-lg-flex justify-content-between">
@@ -8,7 +11,9 @@
             <time class="col-lg-2 text-right"> {{ post?.publishDate | date }}</time>
           </header>
           <div>
-            <app-images
+        
+
+    <app-images
               [imgIndex]="imgIndex"
               [post]="post"
               (nextImageEE)="nextImage()"
@@ -21,10 +26,12 @@
         </div>
       </div>
 
-      <aside class="col-lg-2">
+    <aside class="col-lg-2">
         <app-social (likePostEE)="likePost($event)" [post]="post"></app-social>
         <app-random-posts [randomPostsList]="randomPostsList"></app-random-posts>
       </aside>
+
+  
     </div>
 
     <app-comments
@@ -40,5 +47,9 @@
       [postsStarts]="postsStarts"
       [postsEnds]="postsEnds"
     ></app-post-navigation>
+
+
   </article>
 </div>
+
+

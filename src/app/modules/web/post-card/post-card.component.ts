@@ -12,14 +12,17 @@ export class PostCardComponent implements OnInit {
   @Input()
   i: number;
   @Input()
-  postLikes: Array<PostModel>;
+  postLikes: Array<PostModel>=[]
   @Output()
   likePostEE:  EventEmitter<string> = new EventEmitter<string>();
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
 
   likePost(postId: string) {
+  
     this.likePostEE.emit(postId);
   }
 }

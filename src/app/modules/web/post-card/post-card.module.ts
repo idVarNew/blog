@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PostCardComponent } from './post-card.component';
-import { WebRoutingModule } from '../web-routing.module';
 import { RouterModule } from '@angular/router';
 
 

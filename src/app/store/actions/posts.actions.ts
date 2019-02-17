@@ -37,7 +37,7 @@ export class deletePost implements Action {
 
 export class removeLabel implements Action {
   readonly type = REMOVE_LABEL;
-  constructor(public payload: { id; label }) {}
+  constructor(public payload: { id: string, label: string }) {}
 }
 
 export class editPost implements Action {

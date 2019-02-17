@@ -29,13 +29,11 @@ export class ForgotPasswordComponent implements OnInit {
       .forgot(this.forgotPasswordForm.value.email)
       .then(resolve => {
         this.visible = false;
-        this.alertSuccess = "Check your inbox for a password reset email. Click on the URL provided in the email and enter a new password."
-     
-     
+        this.alertSuccess =
+          'Check your inbox for a password reset email. Click on the URL provided in the email and enter a new password.';
       })
       .catch(error => {
         this.alertError = error.message;
       });
- //  
   }
 }

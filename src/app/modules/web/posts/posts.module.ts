@@ -6,7 +6,7 @@ import { PostsRoutingModule } from './posts-routing.module';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { PostsComponent } from './posts.component';
 import { NgxMasonryModule } from 'ngx-masonry';
-import { NgMasonryGridModule } from 'ng-masonry-grid';
+
 //import { PostCardComponent } from '../post-card/post-card.component';
 import { PostCardModule } from '../post-card/post-card.module';
 
@@ -17,7 +17,7 @@ import { PostCardModule } from '../post-card/post-card.module';
     PostsRoutingModule,
     ReactiveFormsModule,
     NgxMasonryModule,
-    NgMasonryGridModule,
+   /// NgMasonryGridModule,
     NgxPaginationModule,
     PostCardModule
   ],

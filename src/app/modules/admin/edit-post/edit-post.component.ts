@@ -17,11 +17,11 @@ export class EditPostComponent implements OnInit, OnDestroy {
   post: PostModel;
   NewPostForm: FormGroup;
   allLabels: Array<string> = [];
-  labels: Array<string>=[];
+  labels: Array<string> = [];
   imageFiles: PostImagesModel;
-  downloadURLSub
-  param :string;
-  activeRouteSub
+  downloadURLSub;
+  param: string;
+  activeRouteSub;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -32,7 +32,6 @@ export class EditPostComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-
     this.activeRouteSub = this.activeRoute.paramMap
       .pipe(
         switchMap((param: ParamMap) => {
@@ -44,9 +43,9 @@ export class EditPostComponent implements OnInit, OnDestroy {
             map((posts: Array<PostModel>) => {
               return posts.filter((post: PostModel) => {
                 if (post.id === param.get('id')) {
-                   this.param = param.get('id');
-                  this.labels = post.labels
-                  this.post =  post;
+                  this.param = param.get('id');
+                  this.labels = post.labels;
+                  this.post = post;
                   this.imageFiles = this.post['img'];
                   return post;
                 }
@@ -68,12 +67,11 @@ export class EditPostComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-
     this.activeRouteSub.unsubscribe();
     this.downloadURLSub.unsubscribe();
   }
 
-   getAllLabels(posts: Array<PostModel>) {
+  getAllLabels(posts: Array<PostModel>) {
     posts.forEach((post: PostModel) => {
       const labels: Array<string> = this.allLabels.concat(post.labels);
       this.allLabels = Array.from(new Set(labels));
@@ -81,7 +79,6 @@ export class EditPostComponent implements OnInit, OnDestroy {
   }
 
   getImages(image: PostImageModel) {
-
     if (this.param === this.post.id) {
       const smallSize: boolean = this.post.img.small.some(
         (item: PostImageModel): boolean => {
@@ -131,7 +128,7 @@ export class EditPostComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/posts']);
   }
 
-  setCoverPhoto(image:{ string; index: number; postId: string }) {
+  setCoverPhoto(image: { string; index: number; postId: string }) {
     const cover: PostImagesModel = this.post.img;
     cover.small.unshift(cover.small.splice(image.index, 1)[0]);
     cover.large.unshift(cover.large.splice(image.index, 1)[0]);

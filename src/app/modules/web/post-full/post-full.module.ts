@@ -6,7 +6,6 @@ import { PostFullRoutingModule } from './post-full-routing.module';
 import { PostFullComponent } from './post-full.component';
 import { CommentsComponent } from './comments/comments.component';
 import { RandomPostsComponent } from './random-posts/random-posts.component';
-import { ShareModule } from '@ngx-share/core';
 import { ImagesComponent } from './images/images.component';
 import { SocialComponent } from './social/social.component';
 import { PostNavigationComponent } from './post-navigation/post-navigation.component';
@@ -19,16 +18,15 @@ import { LabelsComponent } from './labels/labels.component';
     NgbModule,
     PostFullRoutingModule,
     ReactiveFormsModule,
-    ShareModule.forRoot()
   ],
   declarations: [
-    PostFullComponent,
+   PostFullComponent,
    CommentsComponent,
-   RandomPostsComponent,
+ RandomPostsComponent,
    ImagesComponent,
-   SocialComponent,
-   PostNavigationComponent,
-   LabelsComponent,  
+  SocialComponent,
+  PostNavigationComponent,
+  LabelsComponent,  
   ],
   exports: [
     PostFullComponent

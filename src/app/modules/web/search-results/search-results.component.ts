@@ -1,6 +1,7 @@
+import { posts } from './../../../../testing/posts';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, tap } from 'rxjs/operators';
 import * as AppActions from '../../../store/actions';
 import { Store, select } from '@ngrx/store';
 import { StoreModel, PostModel } from 'src/app/shared/models/index';
@@ -20,25 +21,29 @@ export class SearchResultsComponent implements OnInit {
 
 
   ngOnInit() {
-    this.activeRoute.queryParams
-      .pipe(
-        switchMap(params => {
-          return this.store.pipe(select('posts')).pipe(
-            map((posts: Array<PostModel>) => {
-              return posts.filter((post: PostModel) => {
-                if (post.labels.indexOf(params['label']) > -1) {
-                  return post;
-                }
-              });
-            })
-          );
-        })
-      )
-      .subscribe((posts: Array<PostModel>)=> {
-        if (this.posts.length === 0) {
-          this.posts = posts;
-        }
-        this.postLikes = posts;
-      });
+
+   this.activeRoute.queryParams
+    .pipe(
+      switchMap(params => {
+       
+        return this.store.select('posts').pipe(
+          map((posts: Array<PostModel>) => {
+            return posts.filter((post: PostModel) => {
+              if (post.labels.indexOf(params['label']) > -1) {
+                return post;
+              }
+            });
+          })
+        );
+
+      })
+    )
+    .subscribe((posts: Array<PostModel>)=> {
+     
+        this.posts = posts;
+   
+      this.postLikes = posts;
+    });
+
   }
 }

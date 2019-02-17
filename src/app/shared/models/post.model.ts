@@ -13,7 +13,7 @@ export class PostModel {
 
 export class NewPost {
   title: string;
-  id: string;
+  id?: string;
   publishDate: string;
   description: { text: string };
   labels: Array<string>;

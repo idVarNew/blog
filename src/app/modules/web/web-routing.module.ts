@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WebComponent } from './web.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     component: WebComponent,

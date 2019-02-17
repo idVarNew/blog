@@ -4,10 +4,10 @@
   <ul  class="d-flex justify-content-between d-lg-block">
     <li *ngFor="let randomPost of randomPostsList" class="mb-2" [ngClass]="{'random-post-3': randomPostsList.length === 3,
      'random-post-2': randomPostsList.length === 2}">
-      <ng-container *ngIf="randomPost.img.small[0]">
-        <a [routerLink]="['/posts', randomPost.id]">
-          <img [src]="(randomPost?.img.small)[0].url" [alt]="(randomPost?.img.small)[0].name" /> </a
-      ></ng-container>
+      <div [hidden]="!randomPost?.img?.small[0]">
+        <a [routerLink]="['/posts', randomPost?.id]" class="random-link">
+          <img [src]="(randomPost?.img?.small)[0]?.url" [alt]="(randomPost?.img?.small)[0]?.name" /> </a
+      ></div>
     </li>
   </ul>
 </ng-container>

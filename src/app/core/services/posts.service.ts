@@ -13,10 +13,13 @@ export class PostsService {
   itemsRef$: AngularFireList<any>;
   key: string;
 
-  constructor(public afAuth: AngularFireAuth, public af: AngularFireDatabase) {}
-
-  getUpdate(store) {
+  constructor(public af: AngularFireDatabase) {}
+getHi(){
+  return "Hi----"
+}
+getUpdate(store) {
     const JSONPosts: string | number = JSON.stringify(store);
+    
     if (this.key === undefined) {
       this.itemsRef$.push({ state: JSONPosts });
     } else {
@@ -34,7 +37,7 @@ export class PostsService {
           return JSON.parse(item.payload.val().state);
         });
 
-        return store.length > 0 ? store[0] : Store
+        return store.length > 0 ? store[0] : Store;
       })
     );
   }

@@ -1,12 +1,12 @@
-<ng-container *ngIf="post">
-  <a [routerLink]="['/posts', post.id]">
-    <ng-container *ngIf="(post?.img.small)[0]">
-      <img [src]="(post?.img.small)[0].url" [alt]="(post?.img.small)[0].name" class="post-cover" /> <br />
+<div>
+  <a [routerLink]="['/posts', post?.id || '']">
+    <ng-container *ngIf="(post?.img?.small)[0]">
+      <img [src]="(post?.img?.small)[0]?.url" [alt]="(post?.img?.small)[0]?.name" class="post-cover" /> <br />
     </ng-container>
-
-    <h2 class="post-summary-title p-3">{{ post.title }}</h2>
+    <h2 class="post-summary-title p-3">{{ post?.title }}</h2>
   </a>
-  <button (click)="likePost(post.id)" class="btn btn-c  btn-like">
-    <i class="fas fa-heart"></i> {{ postLikes[i].likes }}
+  <button (click)="likePost(post?.id)" class="btn btn-c  btn-like">
+    <i class="fas fa-heart"></i> <span class="likes-number"> {{ postLikes[i]?.likes }}</span>
   </button>
-</ng-container>
+
+</div>
